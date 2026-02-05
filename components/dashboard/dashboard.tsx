@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
+import { DashboardHeader } from "./dashboard-header";
 
 function DashboardSkeleton() {
     return (
@@ -23,11 +24,11 @@ function DashboardSkeleton() {
 }
 
 export function Dashboard() {
-    const [isLoading, setIsLoading] = useState(true) // For now, later use useSWR and call api
+    const [isLoading, setIsLoading] = useState(false) // For now, later use useSWR and call api
     
     return (
         <div className="flex min-h-screen flex-col bg-background">
-            { isLoading ? (<DashboardSkeleton />) : (<>Hello World</>)}
+            <DashboardHeader lastUpdated={null} isLoading={isLoading} />
         </div>
     )
 }
