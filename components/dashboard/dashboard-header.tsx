@@ -56,7 +56,7 @@ export function DashboardHeader({ isLoading }: { isLoading: boolean }) {
                 </div>
 
                 {/* Current Time */}
-                <div className="font-mono text-sm tabular-nums text-muted-foreground">
+                <div className="font-mono text-sm tabular-nums text-muted-foreground" suppressHydrationWarning>
                     {currentTime.toLocaleTimeString()}
                 </div>
             </div>

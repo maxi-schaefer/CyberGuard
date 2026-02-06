@@ -1,8 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import { DashboardHeader } from "./dashboard-header";
+import useSWR from "swr";
+import { ThreatData } from "@/lib/types";
+import { StatCards } from "./stat-card";
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 function DashboardSkeleton() {
     return (
@@ -24,11 +28,20 @@ function DashboardSkeleton() {
 }
 
 export function Dashboard() {
-    const [isLoading, setIsLoading] = useState(false) // For now, later use useSWR and call api
+    const { data, isLoading } = useSWR<ThreatData>("/api/threats", fetcher, { refreshInterval: 30000, revalidateOnFocus: true });
     
     return (
         <div className="flex min-h-screen flex-col bg-background">
             <DashboardHeader isLoading={isLoading} />
+
+            {isLoading || !data ? (
+                <DashboardSkeleton />
+            ) :(
+                <main className="flex flex-col gap-6 p-6">
+                    {/* Stat Cards */}
+                    <StatCards stats={data.stats} severityCounts={data.severityCounts} />
+                </main>
+            )}
         </div>
     )
 }
