@@ -5,6 +5,7 @@ import { DashboardHeader } from "./dashboard-header";
 import useSWR from "swr";
 import { ThreatData } from "@/lib/types";
 import { StatCards } from "./stat-card";
+import { ThreatTimeline } from "./threat-timeline";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -40,6 +41,13 @@ export function Dashboard() {
                 <main className="flex flex-col gap-6 p-6">
                     {/* Stat Cards */}
                     <StatCards stats={data.stats} severityCounts={data.severityCounts} />
+
+                    {/* Charts Row */}
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                        <div className="lg:col-span-2">
+                            <ThreatTimeline data={data.timelineData} />
+                        </div>
+                    </div>
                 </main>
             )}
         </div>
