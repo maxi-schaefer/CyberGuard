@@ -28,7 +28,7 @@ export function Dashboard() {
     
     return (
         <div className="flex min-h-screen flex-col bg-background">
-            <DashboardHeader lastUpdated={null} isLoading={isLoading} />
+            <DashboardHeader isLoading={isLoading} />
         </div>
     )
 }
